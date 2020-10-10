@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/all.dart';
 import 'package:riverpod_demo/pages/home_page.dart';
 
-final numberProvider = Provider<int>((ref) => 42);
+final numberProvider = StateProvider<int>((ref) => 0);
 
 void main() {
   runApp(ProviderScope(child: MyApp()));
