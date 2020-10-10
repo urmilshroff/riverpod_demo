@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/all.dart';
+import 'package:riverpod_demo/pages/home_page.dart';
+
+final numberProvider = Provider<int>((ref) => 42);
 
 void main() {
-  runApp(MyApp());
+  runApp(ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
