@@ -5,9 +5,10 @@ import 'package:riverpod_demo/main.dart';
 class MyHomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
-    final number = watch(numberProvider);
-    final numberState = watch(numberStateProvider).state;
-    final numberChangeNotifier = watch(numberChangeNotifierProvider);
+    // these are like listeners
+    final numberWatcher = watch(numberProvider);
+    final numberStateWatcher = watch(numberStateProvider).state;
+    final numberChangeNotifierWatcher = watch(numberChangeNotifierProvider);
 
     return Scaffold(
       appBar: AppBar(title: Text('Riverpod Demo')),
@@ -18,14 +19,14 @@ class MyHomePage extends ConsumerWidget {
         // ),
         child: ListView.builder(
           itemBuilder: (context, index) =>
-              Text(numberChangeNotifier.numbers.toString()),
-          itemCount: numberChangeNotifier.numbers.length,
+              Text(numberChangeNotifierWatcher.numbers.toString()),
+          itemCount: numberChangeNotifierWatcher.numbers.length,
         ),
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         // onPressed: () => context.read(numberStateProvider).state++,
-        onPressed: () => numberChangeNotifier.add(10),
+        onPressed: () => numberChangeNotifierWatcher.add(10),
       ),
     );
   }
