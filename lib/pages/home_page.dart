@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/all.dart';
 import 'package:riverpod_demo/main.dart';
 
 class MyHomePage extends HookWidget {
+  var i = 0;
   @override
   Widget build(BuildContext context) {
     /// the Hook must be inside build() of a [HookWidget]
@@ -17,7 +18,8 @@ class MyHomePage extends HookWidget {
           /// Hook can be used to read variables
           itemCount: _itemsHook.itemsList.length,
           itemBuilder: (context, index) => ListTile(
-            title: Text('Item $index'),
+            title: Text('Item ${_itemsHook.itemsList[index]}'),
+            onTap: () => context.read(itemsProvider).remove(index),
           ),
         ),
       ),
@@ -25,7 +27,10 @@ class MyHomePage extends HookWidget {
         child: Icon(Icons.add),
 
         /// DON'T use Hooks when calling functions
-        onPressed: () => context.read(itemsProvider).add(0),
+        onPressed: () {
+          context.read(itemsProvider).add(i);
+          i++;
+        },
       ),
     );
   }

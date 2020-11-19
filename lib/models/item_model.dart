@@ -8,4 +8,9 @@ class ItemChangeNotifier extends ChangeNotifier {
     itemsList.add(number);
     notifyListeners();
   }
+
+  void remove(int index) {
+    itemsList.removeAt(index);
+    notifyListeners();
+  }
 }
