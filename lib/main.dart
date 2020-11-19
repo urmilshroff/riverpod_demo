@@ -3,10 +3,11 @@ import 'package:flutter_riverpod/all.dart';
 import 'package:riverpod_demo/models/item_model.dart';
 import 'package:riverpod_demo/pages/home_page.dart';
 
-// define provider variables (class objects) globally
+/// define [ChangeNotifierProvider] globally
 final itemsProvider =
     ChangeNotifierProvider<ItemChangeNotifier>((ref) => ItemChangeNotifier());
 
+/// wrap [MaterialApp] in [ProviderScope]
 void main() => runApp(ProviderScope(child: MyApp()));
 
 class MyApp extends StatelessWidget {
