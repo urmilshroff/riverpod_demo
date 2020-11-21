@@ -4,30 +4,29 @@ import 'package:riverpod_demo/main.dart';
 import 'package:riverpod_demo/models/item_model.dart';
 
 class MyHomePage extends ConsumerWidget {
-  var i = 0;
   @override
   Widget build(BuildContext context, ScopedReader watch) {
+    /// this is a watcher which listens to changes in the [itemsProvider]'s [state]
     final _itemsList = watch(itemsProvider.state);
 
     return Scaffold(
       appBar: AppBar(title: Text('Riverpod Demo')),
       body: Center(
         child: ListView.builder(
-          /// Hooks can be used to read variable values
-          itemCount: _itemsList.length,
-          itemBuilder: (context, index) => ListTile(
-            title: Text('Item ${_itemsList[index].itemNumber}'),
-            onTap: () => context.read(itemsProvider).remove(_itemsList[index]),
-          ),
-        ),
+            itemCount: _itemsList.length,
+            itemBuilder: (context, index) {
+              final item = _itemsList[index];
+              return ListTile(
+                title: Text('Item ${item.itemNumber}'),
+                onTap: () => context.read(itemsProvider).remove(item),
+              );
+            }),
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-
-        /// DON'T use Hooks when calling functions
         onPressed: () {
-          context.read(itemsProvider).add(MyItem(i));
-          i++;
+          // call state functions using context
+          context.read(itemsProvider).add(MyItem(_itemsList.length));
         },
       ),
     );
