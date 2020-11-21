@@ -3,9 +3,9 @@ import 'package:flutter_riverpod/all.dart';
 import 'package:riverpod_demo/models/item_model.dart';
 import 'package:riverpod_demo/pages/home_page.dart';
 
-/// define [ChangeNotifierProvider] globally
+/// define [StateNotifierProvider] globally
 final itemsProvider =
-    ChangeNotifierProvider<ItemChangeNotifier>((ref) => ItemChangeNotifier());
+    StateNotifierProvider<ItemChangeNotifier>((ref) => ItemChangeNotifier());
 
 /// wrap [MaterialApp] in [ProviderScope]
 void main() => runApp(ProviderScope(child: MyApp()));

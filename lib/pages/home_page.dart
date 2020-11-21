@@ -1,25 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/all.dart';
 import 'package:riverpod_demo/main.dart';
+import 'package:riverpod_demo/models/item_model.dart';
 
-class MyHomePage extends HookWidget {
+class MyHomePage extends ConsumerWidget {
   var i = 0;
   @override
-  Widget build(BuildContext context) {
-    /// the Hook must be inside build() of a [HookWidget]
-    /// Hooks are basically like listeners/readers
-    final _itemsHook = useProvider(itemsProvider);
+  Widget build(BuildContext context, ScopedReader watch) {
+    final _itemsList = watch(itemsProvider.state);
 
     return Scaffold(
       appBar: AppBar(title: Text('Riverpod Demo')),
       body: Center(
         child: ListView.builder(
           /// Hooks can be used to read variable values
-          itemCount: _itemsHook.itemsList.length,
+          itemCount: _itemsList.length,
           itemBuilder: (context, index) => ListTile(
-            title: Text('Item ${_itemsHook.itemsList[index]}'),
-            onTap: () => context.read(itemsProvider).remove(index),
+            title: Text('Item ${_itemsList[index].itemNumber}'),
+            onTap: () => context.read(itemsProvider).remove(_itemsList[index]),
           ),
         ),
       ),
@@ -28,7 +26,7 @@ class MyHomePage extends HookWidget {
 
         /// DON'T use Hooks when calling functions
         onPressed: () {
-          context.read(itemsProvider).add(i);
+          context.read(itemsProvider).add(MyItem(i));
           i++;
         },
       ),

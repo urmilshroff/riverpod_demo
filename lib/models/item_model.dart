@@ -1,16 +1,23 @@
-import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/all.dart';
 
-/// these objects support updating values throughout the app by calling notifyListeners()
-class ItemChangeNotifier extends ChangeNotifier {
-  final List<int> itemsList = [];
+class MyItem {
+  final int itemNumber;
+  MyItem(this.itemNumber);
+}
 
-  void add(int number) {
-    itemsList.add(number);
-    notifyListeners();
+class ItemChangeNotifier extends StateNotifier {
+  /// the [state] itself is the list variable
+
+  ItemChangeNotifier() : super(<MyItem>[]);
+
+  void add(MyItem item) {
+    state = [...state, item];
   }
 
-  void remove(int index) {
-    itemsList.removeAt(index);
-    notifyListeners();
+  void remove(MyItem item) {
+    state = [
+      for (final elt in state)
+        if (elt.itemNumber != item.itemNumber) elt,
+    ];
   }
 }
