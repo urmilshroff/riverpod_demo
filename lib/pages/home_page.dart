@@ -15,7 +15,7 @@ class MyHomePage extends HookWidget {
       appBar: AppBar(title: Text('Riverpod Demo')),
       body: Center(
         child: ListView.builder(
-          /// Hook can be used to read variables
+          /// Hooks can be used to read variable values
           itemCount: _itemsHook.itemsList.length,
           itemBuilder: (context, index) => ListTile(
             title: Text('Item ${_itemsHook.itemsList[index]}'),
