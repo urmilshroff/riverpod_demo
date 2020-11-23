@@ -4,7 +4,7 @@ class MyItem {
   final int itemNumber;
   MyItem(this.itemNumber);
 }
-
+// fully immutable approach
 class ItemChangeNotifier extends StateNotifier {
   /// the [state] itself is the list variable
 
